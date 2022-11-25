@@ -22,7 +22,7 @@ log = logging.getLogger("uvicorn")
 
 class Settings(BaseSettings):
     environment: str = "dev"
-    testing: bool = 0
+    testing: bool = False
 
 
 def get_settings() -> BaseSettings:
