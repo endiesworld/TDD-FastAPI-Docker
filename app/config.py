@@ -23,7 +23,11 @@ log = logging.getLogger("uvicorn")
 class Settings(BaseSettings):
     environment: str = "dev"
     testing: bool = False
+    email: str
+    app_name: str
 
+    class Config:
+        env_file = ".env"
 
 def get_settings() -> BaseSettings:
     log.info("Loading config settings from the environment...")
