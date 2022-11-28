@@ -1,6 +1,6 @@
 import logging
 
-from pydantic import BaseSettings
+from pydantic import BaseSettings, AnyUrl
 from functools import lru_cache
 """
     Here, we defined a Settings class with two attributes:
@@ -26,9 +26,10 @@ class Settings(BaseSettings):
     testing: bool = False
     email: str
     app_name: str
+    database_url: AnyUrl = None
 
-    class Config:
-        env_file = ".env"
+    # class Config:
+    #     env_file = ".env"
 
 @lru_cache()
 def get_settings() -> BaseSettings:

@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.9.15-slim
+FROM python:3.9.15-slim-bullseye
 
 # set working directory
 WORKDIR /usr/src/app
@@ -20,3 +20,10 @@ RUN pip install -r requirements.txt
 
 # add app
 COPY . .
+
+# add entrypoint.sh
+COPY ./entrypoint.sh .
+RUN chmod +x /usr/src/app/entrypoint.sh
+
+# run entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
