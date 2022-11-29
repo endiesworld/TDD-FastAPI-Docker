@@ -1,4 +1,5 @@
 import logging
+import os
 
 from pydantic import BaseSettings, AnyUrl
 from functools import lru_cache
@@ -27,6 +28,11 @@ class Settings(BaseSettings):
     email: str
     app_name: str
     database_url: AnyUrl = None
+    DB_USER : str
+    DB_PASSWORD : str
+    DB_NAME : str
+    DB_HOST : str
+    DB_CONFIG = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
 
     # class Config:
     #     env_file = ".env"
@@ -35,3 +41,10 @@ class Settings(BaseSettings):
 def get_settings() -> BaseSettings:
     log.info("Loading config settings from the environment...")
     return Settings()
+
+# class Config:
+#     DB_USER = os.getenv("DB_USER", "postgres")
+#     DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
+#     DB_NAME = os.getenv("DB_NAME", "postgres")
+#     DB_HOST = os.getenv("DB_HOST", "localhost")
+#     DB_CONFIG = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
